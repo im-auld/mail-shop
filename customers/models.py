@@ -1,22 +1,78 @@
+import os
+import datetime
 from django.db import models
 from django.core import validators
 from sorl.thumbnail import ImageField
 
+
 STATES = (
-    ('AZ', 'Arizona'),
-    ('AK', 'Arkansas'),
-    ('NY', 'New York'),
-    ('WA', 'Washington'),
+    ("AL", "Alabama"),
+    ("AK", "Alaska"),
+    ("AS", "American Samoa"),
+    ("AZ", "Arizona"),
+    ("AR", "Arkansas"),
+    ("CA", "California"),
+    ("CO", "Colorado"),
+    ("CT", "Connecticut"),
+    ("DE", "Delaware"),
+    ("DC", "District Of Columbia"),
+    ("FM", "Federated States Of Micronesia"),
+    ("FL", "Florida"),
+    ("GA", "Georgia"),
+    ("GU", "Guam"),
+    ("HI", "Hawaii"),
+    ("ID", "Idaho"),
+    ("IL", "Illinois"),
+    ("IN", "Indiana"),
+    ("IA", "Iowa"),
+    ("KS", "Kansas"),
+    ("KY", "Kentucky"),
+    ("LA", "Louisiana"),
+    ("ME", "Maine"),
+    ("MH", "Marshall Islands"),
+    ("MD", "Maryland"),
+    ("MA", "Massachusetts"),
+    ("MI", "Michigan"),
+    ("MN", "Minnesota"),
+    ("MS", "Mississippi"),
+    ("MO", "Missouri"),
+    ("MT", "Montana"),
+    ("NE", "Nebraska"),
+    ("NV", "Nevada"),
+    ("NH", "New Hampshire"),
+    ("NJ", "New Jersey"),
+    ("NM", "New Mexico"),
+    ("NY", "New York"),
+    ("NC", "North Carolina"),
+    ("ND", "North Dakota"),
+    ("MP", "Northern Mariana Islands"),
+    ("OH", "Ohio"),
+    ("OK", "Oklahoma"),
+    ("OR", "Oregon"),
+    ("PW", "Palau"),
+    ("PA", "Pennsylvania"),
+    ("PR", "Puerto Rico"),
+    ("RI", "Rhode Island"),
+    ("SC", "South Carolina"),
+    ("SD", "South Dakota"),
+    ("TN", "Tennessee"),
+    ("TX", "Texas"),
+    ("UT", "Utah"),
+    ("VT", "Vermont"),
+    ("VI", "Virgin Islands"),
+    ("VA", "Virginia"),
+    ("WA", "Washington"),
+    ("WV", "West Virginia"),
+    ("WI", "Wisconsin"),
+    ("WY", "Wyoming")
 )
 
 
-ID_TYPES = (
-    ('DL', 'Drivers License'),
-    ('ND', 'State Non-Driver ID'),
-    ('CC', 'Credit/Debit Card'),
-    ('ST', 'Student ID'),
-    ('OT', 'Other'),
-)
+def get_owner_path(instance, filename):
+    parts = [instance.owner.l_name]
+    parts.append(os.path.basename(filename))
+    path = u"/".join(parts)
+    return path
 
 
 class Customer(models.Model):
@@ -44,6 +100,16 @@ class Customer(models.Model):
         'phone number',
         max_length=15,
     )
-    first_id = models.CharField(choices=ID_TYPES)
-    second_id = models.CharField(choices=ID_TYPES)
-    first_id_image = ImageField(upload_to=)
+    photo_file = models.OneToOneField(
+        Photo,
+        related_name='customer',
+        blank=True,
+        null=True,
+    )
+
+
+class Photo(models.Model):
+    photo_file = ImageField(
+        upload_to=get_owner_path,
+    )
+    owner = models.ForeignKey(Customer)
