@@ -46,4 +46,4 @@ class Customer(models.Model):
     )
     first_id = models.CharField(choices=ID_TYPES)
     second_id = models.CharField(choices=ID_TYPES)
-    first_id_image = ImageField()
+    first_id_image = ImageField(upload_to=)
