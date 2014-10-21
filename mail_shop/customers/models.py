@@ -93,7 +93,7 @@ class Customer(models.Model):
         ]
     )
     line_1 = models.CharField('Address Line 1', max_length=50)
-    line_2 = models.CharField('Address Line 2', max_length=50)
+    line_2 = models.CharField('Address Line 2', max_length=50, null=True)
     city = models.CharField(max_length=25)
     state = models.CharField(max_length=2, choices=STATES)
     phone_num = models.CharField(
