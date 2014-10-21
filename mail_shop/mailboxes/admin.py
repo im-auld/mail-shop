@@ -3,6 +3,6 @@ from models import Mailbox
 
 
 class MailboxAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['box_num', 'owner__l_name', 'owner__email']
 
 admin.site.register(Mailbox, MailboxAdmin)
