@@ -17,7 +17,7 @@ RATES = {
 
 class Mailbox(models.Model):
     owner = models.ForeignKey('customers.Customer')
-    box_num = models.IntegerField(unique=True, null=False, editable=False)
+    box_num = models.IntegerField(unique=True, null=False)
     size = models.CharField(max_length=2, choices=BOX_SIZES)
     next_due_on = models.DateField()
     num_of_users = models.IntegerField()
@@ -36,3 +36,6 @@ class Mailbox(models.Model):
     @property
     def yearly_rate(self):
         return self.monthly_rate * 12
+
+    def __unicode__(self):
+        return str(self.box_num)
