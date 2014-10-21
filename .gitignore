@@ -12,6 +12,7 @@ mail_shop/*.sqlite3
 mail_shop/customers/migrations
 mail_shop/packages/migrations
 mail_shop/mailboxes/migrations
+mail_shop/customer_photos/
 
 # Distribution / packaging
 .Python

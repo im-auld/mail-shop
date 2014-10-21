@@ -75,13 +75,6 @@ def get_owner_path(instance, filename):
     return path
 
 
-class Photo(models.Model):
-    photo_file = ImageField(
-        upload_to=get_owner_path,
-    )
-    owner = models.ForeignKey('Customer')
-
-
 class Customer(models.Model):
     f_name = models.CharField(
         'first name',
@@ -107,11 +100,14 @@ class Customer(models.Model):
         'phone number',
         max_length=15,
     )
-    photo_file = models.OneToOneField(
-        Photo,
-        related_name='customer',
+    email = models.EmailField(
+        max_length=35,
+        validators=[validators.EmailValidator('Please enter a valid email')]
+    )
+    photo_file = ImageField(
+        upload_to='customer_photos',
         blank=True,
-        null=True,
+        null=True
     )
 
     def __unicode__(self):
