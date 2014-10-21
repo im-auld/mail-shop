@@ -75,6 +75,13 @@ def get_owner_path(instance, filename):
     return path
 
 
+class Photo(models.Model):
+    photo_file = ImageField(
+        upload_to=get_owner_path,
+    )
+    owner = models.ForeignKey('Customer')
+
+
 class Customer(models.Model):
     f_name = models.CharField(
         'first name',
@@ -95,7 +102,7 @@ class Customer(models.Model):
     line_1 = models.CharField('Address Line 1', max_length=50)
     line_2 = models.CharField('Address Line 2', max_length=50)
     city = models.CharField(max_length=25)
-    state = models.CharField(choices=STATES)
+    state = models.CharField(max_length=2, choices=STATES)
     phone_num = models.CharField(
         'phone number',
         max_length=15,
@@ -106,10 +113,3 @@ class Customer(models.Model):
         blank=True,
         null=True,
     )
-
-
-class Photo(models.Model):
-    photo_file = ImageField(
-        upload_to=get_owner_path,
-    )
-    owner = models.ForeignKey(Customer)

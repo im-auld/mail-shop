@@ -39,9 +39,7 @@ INSTALLED_APPS = (
     'customers',
     'packages',
     'mailboxes',
-    'sorl.thumbnail',
-    'django-configuration',
-    'django-registration',
+    'sorl',
 )
 
 MIDDLEWARE_CLASSES = (

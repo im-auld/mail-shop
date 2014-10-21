@@ -18,12 +18,12 @@ RATES = {
 class Mailbox(models.Model):
     owner = models.ForeignKey('customers.Customer')
     box_num = models.IntegerField(unique=True, null=False, editable=False)
-    size = models.CharField(choices=BOX_SIZES)
+    size = models.CharField(max_length=2, choices=BOX_SIZES)
     next_due_on = models.DateField()
     num_of_users = models.IntegerField()
     num_of_key_sets = models.IntegerField()
-    used_for_business = models.BooleanField()
-    is_current = models.BooleanField()
+    used_for_business = models.BooleanField(default=False)
+    is_current = models.BooleanField(default=True)
 
     @property
     def monthly_rate(self):

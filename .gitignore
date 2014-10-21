@@ -8,6 +8,10 @@ __pycache__/
 # Local Files
 .idea/
 venv/
+mail_shop/*.sqlite3
+mail_shop/customers/migrations
+mail_shop/packages/migrations
+mail_shop/mailboxes/migrations
 
 # Distribution / packaging
 .Python

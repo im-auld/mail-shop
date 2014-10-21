@@ -1,3 +1,8 @@
 from django.contrib import admin
+from models import Mailbox
 
-# Register your models here.
+
+class MailboxAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Mailbox, MailboxAdmin)
