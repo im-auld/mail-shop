@@ -31,22 +31,13 @@ class MailboxAdmin(admin.ModelAdmin):
 
     owner_link.allow_tags = True
     owner_link.short_description = 'Owner'
-    search_fields = ['box_num', 'owner__l_name', 'owner__email']
+    search_fields = ['box_num', 'owner__l_name']
     list_display = [
         'box_num',
         'size',
-        'next_due_on',
-        'monthly_rate',
-        'owner_link',
-        'is_current',
     ]
     list_filter = [
-        'is_current',
-        'used_for_business',
         'size',
-        'is_current',
-        AvailableBoxFilter
     ]
-    readonly_fields = ('is_current',)
 
 admin.site.register(Mailbox, MailboxAdmin)
