@@ -1,1 +1,7 @@
-__author__ = 'ian'
+from django.conf.urls import patterns, url
+
+
+customers_patterns = patterns(
+    'customer.views',
+    url(r'^customers/', 'index')
+)
