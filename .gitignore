@@ -14,6 +14,7 @@ mail_shop/packages/migrations
 mail_shop/mailboxes/migrations
 mail_shop/customer_photos/
 mail_shop/media
+mail_shop/cache
 
 # Distribution / packaging
 .Python
