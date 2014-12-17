@@ -13,7 +13,8 @@ urlpatterns = patterns('',
 
 customers_patterns = patterns(
     'customers.views',
-    url(r'^customers/', 'index')
+    url(r'^customers/', 'index'),
+    url(r'^customer/(?<customer_id>)/', 'customer_view'),
 )
 
 file_patterns = patterns(
