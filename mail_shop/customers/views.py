@@ -3,7 +3,7 @@ from models import Customer
 
 
 def index(request):
-    customers = Customer.objects.all()
+    customers = Customer.objects.all().order_by('l_name')
     context = {
         'customers': customers
     }
