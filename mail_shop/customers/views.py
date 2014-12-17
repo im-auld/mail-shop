@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from models import Customer
+from packages.models import Package
+from mailboxes.models import Mailbox
 
 
 def index(request):
@@ -11,7 +13,11 @@ def index(request):
 
 def customer_view(request, customer_id):
     customer = Customer.objects.get(pk=customer_id)
+    packages = Package.objects.filter(customer=customer)
+    mailboxes = Mailbox.objects.filter(owner=customer)
     context = {
         'customer': customer,
+        'packages': packages,
+        'mailboxes': mailboxes
     }
     return render(request, 'customers/customer_view.html', context)
