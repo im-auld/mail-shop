@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% load thumbnail %}
+{% block dashboard %}
+    <h1>{{ customer }}</h1>
+    {% thumbnail customer.photo_file "200x200" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+    {% endthumbnail %}
+    <h2>Packages</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Box Number</th>
+                    <th>Tracking Number</th>
+                    <th>Date Arrived</th>
+                </tr>
+                {% for package in packages %}
+                    <tr>
+                        <td>{{ package.box_num }}</td>
+                        <td>{{ package.tracking_number }}</td>
+                        <td>{{ package.date_arrived }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <h2>Mailboxes</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Box Number</th>
+                    <th>Start Date</th>
+                    <th>Due Date</th>
+                </tr>
+                {% for mailbox in mailboxes %}
+                    <tr>
+                        <td>{{ mailbox.box_num }}</td>
+                        <td>{{ mailbox.owner.start_date }}</td>
+                        <td>{{ mailbox.owner.due_date }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock dashboard %}
