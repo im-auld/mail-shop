@@ -93,23 +93,22 @@ class Customer(models.Model):
         ]
     )
     line_1 = models.CharField('Address Line 1', max_length=50)
-    line_2 = models.CharField('Address Line 2', max_length=50)
+    line_2 = models.CharField('Address Line 2', max_length=50, null=True)
     city = models.CharField(max_length=25)
-    state = models.CharField(choices=STATES)
+    state = models.CharField(max_length=2, choices=STATES)
     phone_num = models.CharField(
         'phone number',
         max_length=15,
     )
-    photo_file = models.OneToOneField(
-        Photo,
-        related_name='customer',
-        blank=True,
-        null=True,
+    email = models.EmailField(
+        max_length=35,
+        validators=[validators.EmailValidator('Please enter a valid email')]
     )
-
-
-class Photo(models.Model):
     photo_file = ImageField(
-        upload_to=get_owner_path,
+        upload_to='customer_photos',
+        blank=True,
+        null=True
     )
-    owner = models.ForeignKey(Customer)
+
+    def __unicode__(self):
+        return '{self.f_name} {self.l_name}'.format(self=self)

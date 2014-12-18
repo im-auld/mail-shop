@@ -23,6 +23,9 @@ SECRET_KEY = ')=$^ib6e)eb5slw5o@mrzir7)5n)1uu4(ai#v20oc-5(5nli!y'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+TEMPLATE_DIRS = 'templates/',
+
+THUMBNAIL_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -40,8 +43,6 @@ INSTALLED_APPS = (
     'packages',
     'mailboxes',
     'sorl.thumbnail',
-    'django-configuration',
-    'django-registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,3 +88,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/customer_photos/'
