@@ -14,7 +14,7 @@ def index(request):
 def customer_view(request, customer_id):
     customer = Customer.objects.get(pk=customer_id)
     packages = Package.objects.filter(customer=customer)
-    mailboxes = Mailbox.objects.filter(owner=customer)
+    mailboxes = Mailbox.objects.filter(owner__owner=customer)
     context = {
         'customer': customer,
         'packages': packages,
