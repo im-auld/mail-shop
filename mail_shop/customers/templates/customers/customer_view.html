@@ -5,6 +5,24 @@
     {% thumbnail customer.photo_file "200x200" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
     {% endthumbnail %}
+    <h2>Customer Info</h2>
+    <table>
+        <tbody>
+            <tr>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Email</th>
+            </tr>
+                <td>{{ customer.phone_num }}</td>
+                <td>
+                    {{ customer.line_1 }}<br />
+                    {{ customer.line_2 }}<br />
+                    {{ customer.city }}, {{ customer.state }}
+                </td>
+                <td>{{ customer.email }}</td>
+            </tr>
+        </tbody>
+    </table>
     <h2>Packages</h2>
         <table>
             <tbody>
@@ -12,12 +30,18 @@
                     <th>Box Number</th>
                     <th>Tracking Number</th>
                     <th>Date Arrived</th>
+                    <th>Date Picked Up</th>
                 </tr>
                 {% for package in packages %}
-                    <tr>
+                    {% if not package.date_claimed %}
+                    <tr style="background: green;">
+                    {% else %}
+                    <tr style="background: red;">
+                    {% endif %}
                         <td>{{ package.box_num }}</td>
                         <td>{{ package.tracking_number }}</td>
                         <td>{{ package.date_arrived }}</td>
+                        <td>{{ package.date_claimed }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
