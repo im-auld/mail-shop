@@ -15,12 +15,7 @@ RATES = {
 
 
 class Mailbox(models.Model):
-    owner = models.ManyToManyField(
-        'customers.Customer',
-        through='mailboxes.MailboxOwner',
-        blank=True,
-        null=True
-    )
+    owner = models.ForeignKey('mailboxes.MailboxOwner', null=True, blank=True)
     box_num = models.IntegerField('Box Number', unique=True, null=False)
     size = models.CharField(max_length=2, choices=BOX_SIZES)
 
@@ -35,7 +30,7 @@ class Mailbox(models.Model):
 
 
 class MailboxOwner(models.Model):
-    mailbox = models.ForeignKey('mailboxes.Mailbox')
+    box = models.ForeignKey('mailboxes.Mailbox')
     owner = models.ForeignKey('customers.Customer')
     start_date = models.DateField('Owned Since: ')
     due_date = models.DateField('Next Bill Due: ')
