@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from models import Customer
+from django.http import Http404
+
+from customers.models import Customer
 from packages.models import Package
 from mailboxes.models import Mailbox
 
@@ -12,12 +14,15 @@ def index(request):
     return render(request, 'customers/index.html', context)
 
 def customer_view(request, customer_id):
-    customer = Customer.objects.get(pk=customer_id)
+    try:
+        customer = Customer.objects.get(pk=customer_id)
+    except Customer.DoesNotExist:
+        raise Http404
     packages = Package.objects.filter(customer=customer)
     mailboxes = Mailbox.objects.filter(owner__owner=customer)
     context = {
         'customer': customer,
         'packages': packages,
-        'mailboxes': mailboxes
+        'mailboxes': mailboxes,
     }
     return render(request, 'customers/customer_view.html', context)
