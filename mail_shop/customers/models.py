@@ -96,6 +96,7 @@ class Customer(models.Model):
     line_2 = models.CharField('Address Line 2', max_length=50, null=True)
     city = models.CharField(max_length=25)
     state = models.CharField(max_length=2, choices=STATES)
+    zip_code = models.CharField(max_length=6)
     phone_num = models.CharField(
         'phone number',
         max_length=15,
