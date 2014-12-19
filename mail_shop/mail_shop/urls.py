@@ -13,7 +13,7 @@ urlpatterns = patterns('',
 
 customers_patterns = patterns(
     'customers.views',
-    url(r'^customers/', 'index'),
+    url(r'^customers/', 'index', name='index'),
     url(
         r'^customer/(?P<customer_id>\d+)/',
         'customer_view',
