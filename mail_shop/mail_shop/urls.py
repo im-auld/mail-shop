@@ -2,6 +2,8 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 
+from customers.urls import customers_patterns
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -9,16 +11,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-)
-
-customers_patterns = patterns(
-    'customers.views',
-    url(r'^customers/', 'index', name='index'),
-    url(
-        r'^customer/(?P<customer_id>\d+)/',
-        'customer_view',
-        name='customer_view'
-    ),
 )
 
 file_patterns = patterns(
