@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import Http404
 
 from customers.models import Customer
+from customers.forms import CustomerForm
 from packages.models import Package
 from mailboxes.models import Mailbox
 
@@ -26,3 +27,11 @@ def customer_view(request, customer_id):
         'mailboxes': mailboxes,
     }
     return render(request, 'customers/customer_view.html', context)
+
+def add_customer(request):
+    form = CustomerForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'customers/customer_form.html', context)
+

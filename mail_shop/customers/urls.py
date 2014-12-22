@@ -9,4 +9,9 @@ customers_patterns = patterns(
         'customer_view',
         name='customer_view'
     ),
+    url(
+        r'^customer/add$',
+        'add_customer',
+        name='add_customer_view'
+    ),
 )
