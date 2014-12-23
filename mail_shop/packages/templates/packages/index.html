@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block dashboard %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Box Number</th>
+                <th>Customer Name</th>
+                <th>Date Arrived</th>
+                <th>Tracking Number</th>
+                <th></th>
+            </tr>
+            {% for package in packages %}
+                <tr>
+                    <td>{{ package.box_num.box_num }}</td>
+                    <td>{{ package.customer.l_name }}, {{ package.customer.f_name }} </td>
+                    <td>{{ package.date_arrived }}</td>
+                    <td>{{ package.tracking_number }}</td>
+                    <td><a href={% url 'package_view' package.id %}>Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock dashboard %}

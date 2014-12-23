@@ -3,6 +3,7 @@ from django.contrib import admin
 from django.conf import settings
 
 from customers.urls import customers_patterns
+from packages.urls import packages_patterns
 
 
 urlpatterns = patterns('',
@@ -24,3 +25,4 @@ file_patterns = patterns(
 
 urlpatterns.extend(customers_patterns)
 urlpatterns.extend(file_patterns)
+urlpatterns.extend(packages_patterns)

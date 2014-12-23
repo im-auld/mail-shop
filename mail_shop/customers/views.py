@@ -28,6 +28,8 @@ def customer_view(request, customer_id):
     }
     return render(request, 'customers/customer_view.html', context)
 
+# TODO: Refactor this view. Move customer adding bits to outside function.
+# TODO: Rename to follow other views naming patterns.
 def add_customer(request):
     form = CustomerForm(request.POST)
     if all([form.is_valid(), request.POST]):
