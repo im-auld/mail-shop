@@ -1,3 +1,11 @@
 from django.shortcuts import render
+from packages.models import Package
 
-# Create your views here.
+
+
+def index(request):
+    packages = Package.objects.all()
+    context = {
+        'packages': packages,
+    }
+    return render(request, 'packages/index.html', context)
