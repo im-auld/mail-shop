@@ -12,6 +12,6 @@ customers_patterns = patterns(
     url(
         r'^customer/add$',
         'add_customer',
-        name='add_customer_view'
+        name='customer_form_view'
     ),
 )

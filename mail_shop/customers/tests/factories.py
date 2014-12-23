@@ -12,7 +12,7 @@ class CustomerFactory(factory.Factory):
     f_name = factory.Sequence(lambda n: 'First{}'.format(n))
     l_name = factory.Sequence(lambda n: 'Last{}'.format(n))
     line_1 = factory.Sequence(lambda n: '{} Test Street')
-    line_2 = ''
+    line_2 = 'Apt 3'
     city = 'Test City'
     state = random.choice(STATES)[0]
     zip_code = '12345'

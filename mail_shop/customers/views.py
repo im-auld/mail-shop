@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 
 from customers.models import Customer
@@ -29,7 +29,11 @@ def customer_view(request, customer_id):
     return render(request, 'customers/customer_view.html', context)
 
 def add_customer(request):
-    form = CustomerForm()
+    form = CustomerForm(request.POST)
+    if all([form.is_valid(), request.POST]):
+        new_user = form.save()
+        new_user.save()
+        return  redirect('customer_view', customer_id=new_user.pk)
     context = {
         'form': form,
     }

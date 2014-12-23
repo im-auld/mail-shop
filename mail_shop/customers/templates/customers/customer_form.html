@@ -1,4 +1,8 @@
 {% extends 'layout.html' %}
 {% block dashboard %}
-{{ form }}
-git stat
+<form action="/customer/add" method="post" name="customer-form">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" name="customer-form">Submit</button>
+</form>
+{% endblock dashboard %}
