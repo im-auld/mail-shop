@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 
 from packages.models import Package
+from packages.forms import PackageForm
 
 
 def index(request):
@@ -16,10 +17,18 @@ def package_view(request, package_id):
         package = Package.objects.get(pk=package_id)
     except Package.DoesNotExist:
         raise Http404
-    customer = package.customer
     context = {
         'package': package,
-        'customer': customer,
-        'page_title': 'Package for {customer.l_name}'.format(customer=customer)
+        'customer': package.customer,
+        'page_title': 'Package for {customer.l_name}'.format(
+            customer=package.customer
+        )
     }
     return render(request, 'packages/package_view.html', context)
+
+def package_form_view(request):
+    form = PackageForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'packages/package_form.html', context)

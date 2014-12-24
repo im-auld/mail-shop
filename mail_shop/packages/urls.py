@@ -13,4 +13,9 @@ packages_patterns = patterns(
         'package_view',
         name='package_view'
     ),
+    url(
+        r'^packages/add$',
+        'package_form_view',
+        name='package_form_view',
+    )
 )
