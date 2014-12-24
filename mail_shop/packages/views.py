@@ -4,7 +4,6 @@ from django.http import Http404
 from packages.models import Package
 
 
-
 def index(request):
     packages = Package.objects.all()
     context = {
