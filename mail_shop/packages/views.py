@@ -23,3 +23,18 @@ def package_view(request, package_id):
         'page_title': 'Package for {customer.l_name}'.format(customer=customer)
     }
     return render(request, 'packages/package_view.html', context)
+
+
+def package_form_view(request):
+    if request.method == 'POST':
+        form = PackageForm(request.POST)
+        new_package = form.save()
+        new_package.save()
+        return redirect('packages_index')
+    else:
+        form = PackageForm()
+        context ={
+            'form': form,
+            'page_title': 'Add Package'
+        }
+        return render(request, 'packages/package_form.html', context)
