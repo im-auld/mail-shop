@@ -39,6 +39,9 @@ class MailboxOwner(models.Model):
     used_for_business = models.BooleanField('Used for business', default=False)
     is_current = models.BooleanField('Current', default=True)
 
+    def __unicode__(self):
+        return '{o.l_name}, {o.f_name}'.format(o=self.owner)
+
     @property
     def monthly_rate(self):
         return (

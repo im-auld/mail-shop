@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% load thumbnail %}
+{% block dashboard %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Last Name</th>
+                <th>First Name</th>
+            </tr>
+            <tr>
+                <td>{{ mailbox.box_num }}</td>
+                <td>{{ mailbox.size }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock dashboard %}

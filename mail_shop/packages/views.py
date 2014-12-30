@@ -10,7 +10,7 @@ def index(request):
     context = {
         'packages': packages,
     }
-    return render(request, 'packages/index.html', context)
+    return render(request, 'packages/index', context)
 
 def package_view(request, package_id):
     try:
