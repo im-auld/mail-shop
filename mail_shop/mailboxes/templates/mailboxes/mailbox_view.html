@@ -1,16 +1,30 @@
 {% extends 'layout.html' %}
 {% load thumbnail %}
 {% block dashboard %}
-    <table>
-        <tbody>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-            </tr>
-            <tr>
-                <td>{{ mailbox.box_num }}</td>
-                <td>{{ mailbox.size }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <h1>Mailbox {{ mailbox.box_num }}</h1>
+    <h2>Owner Info</h2>
+    {% if not owner %}
+        <p>This mailbox is not currently rented.</p>
+    {% else %}
+        <table>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Owned Since</th>
+                    <th>Next Due On</th>
+                    <th>Current</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="{% url 'customer_view' owner.owner.id %}">
+                            {{ owner.owner.l_name }}, {{ owner.owner.f_name }}
+                        </a>
+                    </td>
+                    <td>{{ owner.start_date }}</td>
+                    <td>{{ owner.due_date }}</td>
+                    <td>{{ owner.is_current }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
 {% endblock dashboard %}
