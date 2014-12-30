@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% load thumbnail %}
+{% block dashboard %}
+    <table>
+        <tbody>
+            <tr>
+                <th>Number</th>
+                <th>Size</th>
+                <th></th>
+            </tr>
+            {% for mailbox in mailboxes %}
+                <tr>
+                    <td>{{ mailbox.box_num }}</td>
+                    <td>{{ mailbox.size }}</td>
+                    <td>{{ mailbox.owner }}</td>
+                    <td><a href={% url 'mailbox_view' mailbox.id %}>Details</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock dashboard %}

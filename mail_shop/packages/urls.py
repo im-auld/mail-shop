@@ -6,7 +6,7 @@ packages_patterns = patterns(
     url(
         r'^packages/$',
         'index',
-        name='index'
+        name='packages_index'
     ),
     url(
         r'^package/(?P<package_id>\d+)/',
