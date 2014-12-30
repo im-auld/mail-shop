@@ -26,9 +26,17 @@ def package_view(request, package_id):
     }
     return render(request, 'packages/package_view.html', context)
 
+
 def package_form_view(request):
-    form = PackageForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'packages/package_form.html', context)
+    if request.method == 'POST':
+        form = PackageForm(request.POST)
+        new_package = form.save()
+        new_package.save()
+        return redirect('packages_index')
+    else:
+        form = PackageForm()
+        context ={
+            'form': form,
+            'page_title': 'Add Package'
+        }
+        return render(request, 'packages/package_form.html', context)
