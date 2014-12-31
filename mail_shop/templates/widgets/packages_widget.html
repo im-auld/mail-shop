@@ -1,1 +1,20 @@
-<p>Hi! I'm the packages widget.</p>
+<h2>Package List</h2>
+<input id="package-filter" type="text" placeholder="Make me filter with jQuery">
+<ul id="package-list">
+    {% for package in packages %}
+        <li class="package-list-item" >
+            {{ package }}
+        </li>
+    {% endfor %}
+</ul>
+<script>
+    $("#package-filter").keyup(function() {
+        filterValue = $("#package-filter").val();
+        if(filterValue == '')
+            $('.package-list-item').show();
+        else{
+            $('.package-list-item:not(:contains(' + filterValue + '))').hide();
+            $('.package-list-item:contains(' + filterValue + ')').show();
+        }
+    });
+</script>
