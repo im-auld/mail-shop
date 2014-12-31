@@ -15,6 +15,15 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
+index_patterns = patterns(
+    'mail_shop.views',
+    url(
+        r'^$',
+        'index',
+        name='index'
+    )
+)
+
 file_patterns = patterns(
     '',
     (
@@ -26,5 +35,6 @@ file_patterns = patterns(
 
 urlpatterns.extend(customers_patterns)
 urlpatterns.extend(file_patterns)
+urlpatterns.extend(index_patterns)
 urlpatterns.extend(packages_patterns)
 urlpatterns.extend(mailboxes_patterns)
