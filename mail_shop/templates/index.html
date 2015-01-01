@@ -1,5 +1,13 @@
 {% extends 'layout.html' %}
 {% load thumbnail %}
 {% block dashboard %}
-    Hello, from home!
+    <section>
+        {% include 'widgets/packages_widget.html' %}
+    </section>
+    <section>
+        {% include 'widgets/alerts_widget.html' %}
+    </section>
+    <section>
+        {% include 'widgets/stats_widget.html' %}
+    </section>
 {% endblock dashboard %}

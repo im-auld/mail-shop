@@ -1,5 +1,7 @@
+from datetime import date
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.views.decorators.csrf import csrf_exempt
 
 from packages.models import Package
 from packages.forms import PackageForm
@@ -40,3 +42,15 @@ def package_form_view(request):
             'page_title': 'Add Package'
         }
         return render(request, 'packages/package_form.html', context)
+
+
+def claim_packages_view(request):
+    if request.method == 'POST':
+        package_ids = request.POST.getlist('claimed_packages[]', [])
+        print package_ids
+        import pdb; pdb.set_trace()
+        for package_id in package_ids:
+            package = Package.objects.get(pk=package_id)
+            package.date_claimed = date.today()
+            package.save()
+    return redirect('index')
