@@ -17,5 +17,10 @@ packages_patterns = patterns(
         r'^packages/add$',
         'package_form_view',
         name='package_form_view',
-    )
+    ),
+    url(
+        r'^packages/claim$',
+        'claim_packages_view',
+        name='claim_packages_view'
+    ),
 )

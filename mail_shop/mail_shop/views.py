@@ -6,7 +6,7 @@ from mailboxes.models import Mailbox, MailboxOwner
 
 
 def index(request):
-    packages = Package.objects.filter(date_claimed__isnull=True)
+    packages = Package.objects.filter(date_claimed__isnull=True).order_by('box_num')
     context = {
         'packages': packages,
     }

@@ -6,6 +6,7 @@
                 <th>Box Number</th>
                 <th>Customer Name</th>
                 <th>Date Arrived</th>
+                <th>Date Picked Up</th>
                 <th>Tracking Number</th>
                 <th></th>
             </tr>
@@ -14,6 +15,7 @@
                     <td>{{ package.box_num.box_num }}</td>
                     <td>{{ package.customer.l_name }}, {{ package.customer.f_name }} </td>
                     <td>{{ package.date_arrived }}</td>
+                    <td>{{ package.date_claimed }}</td>
                     <td>{{ package.tracking_number }}</td>
                     <td><a href={% url 'package_view' package.id %}>Details</a></td>
                 </tr>
