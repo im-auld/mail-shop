@@ -112,4 +112,4 @@ class Customer(models.Model):
     )
 
     def __unicode__(self):
-        return '{self.f_name} {self.l_name}'.format(self=self)
+        return '{self.l_name}, {self.f_name}'.format(self=self)

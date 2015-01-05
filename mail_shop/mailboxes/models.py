@@ -40,12 +40,12 @@ class MailboxOwner(models.Model):
     is_current = models.BooleanField('Current', default=True)
 
     def __unicode__(self):
-        return '{o.l_name}, {o.f_name}'.format(o=self.owner)
+        return '{o.owner} - Box: {o.box}'.format(o=self)
 
     @property
     def monthly_rate(self):
         return (
-            RATES[str(self.mailbox.size)] +
+            RATES[str(self.box.size)] +
             (self.num_additional_users * 5) +
             (int(self.used_for_business * 5))
         )
