@@ -64,7 +64,6 @@
         }
     });
     $("#package-list-form").submit(function(event){
-        event.preventDefault();
         $.ajax({
             type: 'POST',
             url: 'packages/claim',

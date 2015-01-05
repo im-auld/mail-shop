@@ -48,7 +48,6 @@ def claim_packages_view(request):
     if request.method == 'POST':
         package_ids = request.POST.getlist('claimed_packages[]', [])
         print package_ids
-        import pdb; pdb.set_trace()
         for package_id in package_ids:
             package = Package.objects.get(pk=package_id)
             package.date_claimed = date.today()
