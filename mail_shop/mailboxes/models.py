@@ -45,7 +45,7 @@ class MailboxOwner(models.Model):
     @property
     def monthly_rate(self):
         return (
-            RATES[str(self.mailbox.size)] +
+            RATES[str(self.box.size)] +
             (self.num_additional_users * 5) +
             (int(self.used_for_business * 5))
         )
