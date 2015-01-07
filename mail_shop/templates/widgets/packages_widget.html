@@ -10,7 +10,11 @@
         </li>
     {% endfor %}
     </ul>
-    <button type="submit" name="claim-packages">Claim</button>
+    <div id="pin-form">
+        <input type="text" id="pin">
+        <input type="submit" name="claim-packages" tabindex="-1" value="Submit" >
+    </div>
+    <button type="button" >Claim</button>
 </form>
 <script>
     var claimedPackages = [];
@@ -64,10 +68,15 @@
         }
     });
     $("#package-list-form").submit(function(event){
+        var pin = $("#pin").val();
+        console.log(pin);
         $.ajax({
             type: 'POST',
             url: 'packages/claim',
-            data: {claimed_packages: claimedPackages}
+            data: {
+                claimed_packages: claimedPackages,
+                pin: pin,
+            },
         });
     });
 </script>

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from packages.models import Package
 from packages.forms import PackageForm
+from customers.models import Customer
 
 
 def index(request):
@@ -47,9 +48,18 @@ def package_form_view(request):
 def claim_packages_view(request):
     if request.method == 'POST':
         package_ids = request.POST.getlist('claimed_packages[]', [])
-        print package_ids
-        for package_id in package_ids:
-            package = Package.objects.get(pk=package_id)
-            package.date_claimed = date.today()
-            package.save()
+        packages = validate_package_ids(package_ids)
+        if packages:
+            pin = int(request.POST.get('pin', 0000))
+            for package in packages:
+                package.date_claimed = date.today()
+                package.save()
     return redirect('index')
+
+def validate_package_ids(package_ids):
+    packages = Package.objects.filter(id__in=package_ids)
+    customers = [p.customer for p in packages]
+    if customers.count(customers[0]) == len(customers):
+        return packages
+    else:
+        return None
