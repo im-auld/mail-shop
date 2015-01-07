@@ -5,6 +5,8 @@ from django.core import validators
 from sorl.thumbnail import ImageField
 
 
+
+
 STATES = (
     ("AL", "Alabama"),
     ("AK", "Alaska"),
@@ -109,6 +111,12 @@ class Customer(models.Model):
         upload_to='customer_photos',
         blank=True,
         null=True
+    )
+    pin = models.IntegerField(
+        validators= [
+            validators.MaxValueValidator(9999),
+            validators.MinValueValidator(1000)
+        ]
     )
 
     def __unicode__(self):
