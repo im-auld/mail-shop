@@ -48,18 +48,19 @@ def package_form_view(request):
 def claim_packages_view(request):
     if request.method == 'POST':
         package_ids = request.POST.getlist('claimed_packages[]', [])
-        packages = validate_package_ids(package_ids)
+        pin = int(request.POST.get('pin', 0))
+        packages = validate_claim(package_ids, pin)
         if packages:
-            pin = int(request.POST.get('pin', 0000))
             for package in packages:
                 package.date_claimed = date.today()
                 package.save()
     return redirect('index')
 
-def validate_package_ids(package_ids):
+def validate_claim(package_ids, pin):
     packages = Package.objects.filter(id__in=package_ids)
-    customers = [p.customer for p in packages]
-    if customers.count(customers[0]) == len(customers):
+    # TODO: Hash stored pins
+    customers = [p.customer for p in packages if p.customer.pin == pin]
+    if customers.count(customers[0]) == len(customers) and customers:
         return packages
     else:
         return None
