@@ -1,23 +1,11 @@
 <h2>Package List</h2>
 <input id="package-filter" type="text" placeholder="Type to filter">
-<form id="package-list-form" name="claim-packages" method="post">
+<form name="django-claim" method="post" action="packages/claim">
     {% csrf_token %}
-    <ul id="package-list">
-    {% for package in packages %}
-        <li class="package-list-item" >
-            <input type="checkbox" name="package" value="{{ package.id }}">
-            <a href="{% url 'package_view' package.id %}">{{ package }}</a>
-        </li>
-    {% endfor %}
-    </ul>
-    <div id="pin-form" style="display:none;" title="Enter customer PIN">
-        <input type="password" id="pin" autocomplete="off">
-        <input type="submit" name="claim-packages" tabindex="-1" value="Submit" >
-    </div>
-    <button id="claim-button" type="button" >Claim</button>
+    {{ claim_form }}
+    <button type="submit" name="django-claim">Claim</button>
 </form>
-<script>
-    var claimedPackages = [];
+<script >
     function titleCase(val){
         return val.charAt(0).toUpperCase()+val.substr(1).toLowerCase();
     }
@@ -51,35 +39,10 @@
     $("#package-filter").keyup(function() {
         filterValue = titleCase($("#package-filter").val());
         if(filterValue == '')
-            $('.package-list-item').show();
+            $('#id_unclaimed_packages > li').show();
         else{
-            $('.package-list-item:not(:contains(' + filterValue + '))').hide();
-            $('.package-list-item:contains(' + filterValue + ')').show();
+            $('#id_unclaimed_packages > li:not(:contains(' + filterValue + '))').hide();
+            $('#id_unclaimed_packages > li:contains(' + filterValue + ')').show();
         }
-    });
-    $('.package-list-item > input').change(function(){
-        var packageID = $(this).val();
-        if($(this).is(':checked')){
-            claimedPackages.push(packageID);
-        } else {
-            claimedPackages = jQuery.grep(claimedPackages, function(value) {
-                return value != packageID;
-            });
-        }
-    });
-    $("#claim-button").click(function(){
-        $("#pin-form").dialog({modal: true});
-    });
-    $("#package-list-form").submit(function(event){
-        var pin = $("#pin").val();
-        console.log(pin);
-        $.ajax({
-            type: 'POST',
-            url: 'packages/claim',
-            data: {
-                claimed_packages: claimedPackages,
-                pin: pin,
-            },
-        });
     });
 </script>
