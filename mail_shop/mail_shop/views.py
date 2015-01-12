@@ -18,7 +18,7 @@ def index(request):
         'stats': stats,
         'claim_form': claim_form
     }
-    return render(request, 'index.html', context)
+    return render(request, 'mailshop_index.html', context)
 
 def get_stats(late):
     rented = MailboxOwner.objects.all()

@@ -2,24 +2,28 @@ from django.db import models
 
 
 payment_methods = [
-    (1, 'CC'),
-    (2, 'Cash'),
-    (3, 'Check'),
-    (4, 'Store Credit'),
+    ('CC', 'CC'),
+    ('Cash', 'Cash'),
+    ('Check', 'Check'),
+    ('Store Credit', 'Store Credit'),
 ]
 
 payment_types = [
-    (1, 'Rent'),
-    (2, 'Extra Mail Fee'),
-    (3, 'Extra Package Fee'),
-    (4, 'Other fee'),
+    ('Rent', 'Rent'),
+    ('Extra Mail Fee', 'Extra Mail Fee'),
+    ('Extra Package Fee', 'Extra Package Fee'),
+    ('Other Fee', 'Other fee'),
 ]
 
 
 class Payment(models.Model):
     customer = models.ForeignKey('mailboxes.MailboxOwner')
     amount = models.IntegerField()
-    method = models.CharField(choices=payment_methods)
+    method = models.CharField(max_length=20, choices=payment_methods)
     date = models.DateField(auto_now=True)
-    notes = models.CharField(max_length=250)
-    payment_type = models.CharField(choices=payment_types)
+    payment_type = models.CharField(max_length=20, choices=payment_types)
+    notes = models.CharField(
+        max_length=250,
+        blank=True,
+        null=True,
+    )

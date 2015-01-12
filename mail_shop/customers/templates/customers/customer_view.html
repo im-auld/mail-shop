@@ -48,17 +48,23 @@
         </table>
     <h2>Mailboxes</h2>
         <table>
-            <tbody>
+            <thead>
                 <tr>
                     <th>Box Number</th>
                     <th>Start Date</th>
                     <th>Due Date</th>
+                    <th></th>
                 </tr>
+            </thead>
+            <tbody>
                 {% for mailbox in mailboxes %}
                     <tr>
                         <td>{{ mailbox.box_num }}</td>
                         <td>{{ mailbox.owner.start_date }}</td>
                         <td>{{ mailbox.owner.due_date }}</td>
+                        <td>
+                            <a href="{% url 'rent_payment_view' %}">Make Payment</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

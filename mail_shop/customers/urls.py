@@ -4,12 +4,12 @@ from django.conf.urls import patterns, url
 customers_patterns = patterns(
     'customers.views',
     url(
-        r'^customers/',
+        r'^customers/$',
         'index',
         name='customers_index'
     ),
     url(
-        r'^customer/(?P<customer_id>\d+)/',
+        r'^customers/(?P<customer_id>\d+)$',
         'customer_view',
         name='customer_view'
     ),

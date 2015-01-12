@@ -12,7 +12,7 @@ def index(request):
     context = {
         'customers': customers
     }
-    return render(request, 'customers/index.html', context)
+    return render(request, 'customers/customers_index.html', context)
 
 def customer_view(request, customer_id):
     try:
