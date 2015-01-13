@@ -63,8 +63,31 @@
                         <td>{{ mailbox.owner.start_date }}</td>
                         <td>{{ mailbox.owner.due_date }}</td>
                         <td>
-                            <a href="{% url 'rent_payment_view' %}">Make Payment</a>
+                            <a href="{% url 'filled_payment_view' mailbox.id %}">Make Payment</a>
                         </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <h2>Payments</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Payment for</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                    <tr>
+                        <td>{{ payment.customer }}</td>
+                        <td>{{ payment.payment_type }}</td>
+                        <td>${{ payment.amount }}</td>
+                        <td>{{ payment.date }}</td>
+                        <td>{{ payment.method }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

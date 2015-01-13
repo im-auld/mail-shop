@@ -5,6 +5,7 @@ from customers.models import Customer
 from customers.forms import CustomerForm
 from packages.models import Package
 from mailboxes.models import Mailbox
+from payments.models import Payment
 
 
 def index(request):
@@ -21,10 +22,12 @@ def customer_view(request, customer_id):
         raise Http404
     packages = Package.objects.filter(customer=customer)
     mailboxes = Mailbox.objects.filter(owner__owner=customer)
+    payments = Payment.objects.filter(customer__owner=customer)
     context = {
         'customer': customer,
         'packages': packages,
         'mailboxes': mailboxes,
+        'payments': payments,
     }
     return render(request, 'customers/customer_view.html', context)
 
