@@ -63,7 +63,7 @@
                         <td>{{ mailbox.owner.start_date }}</td>
                         <td>{{ mailbox.owner.due_date }}</td>
                         <td>
-                            <a href="{% url 'filled_payment_view' mailbox.id %}">Make Payment</a>
+                            <a href="{% url 'filled_payment_view' mailbox.pk %}">Make Payment</a>
                         </td>
                     </tr>
                 {% endfor %}

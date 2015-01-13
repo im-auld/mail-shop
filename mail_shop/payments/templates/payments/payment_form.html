@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block dashboard %}
-    <form name="payment-form" method="POST" action="payments">
+    <form name="payment-form" method="POST" action="/payments">
         {% csrf_token %}
         {{ form }}
         <button type="submit" name="payment-form">Make Payment</button>
