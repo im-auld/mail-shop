@@ -53,6 +53,8 @@
                     <th>Box Number</th>
                     <th>Start Date</th>
                     <th>Due Date</th>
+                    <th>Last Payment Date</th>
+                    <th>Balance</th>
                     <th></th>
                 </tr>
             </thead>
@@ -62,6 +64,8 @@
                         <td>{{ mailbox.box_num }}</td>
                         <td>{{ mailbox.owner.start_date }}</td>
                         <td>{{ mailbox.owner.due_date }}</td>
+                        <td>{{ mailbox.owner.last_payment_date }}</td>
+                        <td>${{ mailbox.owner.balance }}</td>
                         <td>
                             <a href="{% url 'filled_payment_view' mailbox.pk %}">Make Payment</a>
                         </td>
@@ -69,7 +73,7 @@
                 {% endfor %}
             </tbody>
         </table>
-    <h2>Payments</h2>
+    <h2>Transactions</h2>
         <table>
             <thead>
                 <tr>
@@ -81,13 +85,13 @@
                 </tr>
             </thead>
             <tbody>
-                {% for payment in payments %}
+                {% for transaction in transactions %}
                     <tr>
-                        <td>{{ payment.customer }}</td>
-                        <td>{{ payment.payment_type }}</td>
-                        <td>${{ payment.amount }}</td>
-                        <td>{{ payment.date }}</td>
-                        <td>{{ payment.method }}</td>
+                        <td>{{ transaction.customer }}</td>
+                        <td>{{ transaction.transaction_type }}</td>
+                        <td>${{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.method }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

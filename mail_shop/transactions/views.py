@@ -1,18 +1,18 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
+
 from mailboxes.models import MailboxOwner
-from payments.forms import PaymentForm
+from transactions.forms import TransactionForm
 
 
-def payment_view(request, mailbox_id=None):
+def transaction_view(request, mailbox_id=None):
     if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        payment = form.save()
-        payment.save()
+        transaction = PaymentForm(request.POST).save()
+        transaction.save()
         return redirect('customers_index')
     else:
         data = _get_initial_form_data(mailbox_id)
-        form = PaymentForm(initial=data)
+        form = TransactionForm(initial=data)
         context = {
             'form': form,
         }
@@ -29,3 +29,6 @@ def _get_initial_form_data(mailbox_id):
         return data
     except MailboxOwner.DoesNotExist:
         return {}
+
+def _apply_payment(payment):
+    owner = MailboxOwner.objects.get(owner=payment.customer)
