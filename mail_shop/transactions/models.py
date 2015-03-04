@@ -31,7 +31,7 @@ class Transaction(models.Model):
     )
     transaction_reason = models.CharField(
         max_length=20,
-        choices=transaction_types
+        choices=transaction_reasons
     )
     payment_method = models.CharField(
         max_length=20,

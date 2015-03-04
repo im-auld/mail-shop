@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Mailbox
+from models import Mailbox, MailboxOwner
 
 
 class AvailableBoxFilter(admin.SimpleListFilter):
@@ -40,4 +40,10 @@ class MailboxAdmin(admin.ModelAdmin):
         'size',
     ]
 
+
+class MailboxOwnerAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Mailbox, MailboxAdmin)
+admin.site.register(MailboxOwner, MailboxOwnerAdmin)

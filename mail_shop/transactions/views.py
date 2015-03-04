@@ -7,7 +7,7 @@ from transactions.forms import TransactionForm
 
 def transaction_view(request, mailbox_id=None):
     if request.method == 'POST':
-        transaction = PaymentForm(request.POST).save()
+        transaction = TransactionForm(request.POST).save()
         transaction.save()
         return redirect('customers_index')
     else:
@@ -16,7 +16,7 @@ def transaction_view(request, mailbox_id=None):
         context = {
             'form': form,
         }
-        return render(request, 'payments/payment_form.html', context)
+        return render(request, 'transactions/transaction_form.html', context)
 
 def _get_initial_form_data(mailbox_id):
     try:

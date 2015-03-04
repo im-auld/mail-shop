@@ -23,7 +23,7 @@ def index(request):
 def get_stats(late):
     rented = MailboxOwner.objects.all()
     number_of_boxes = len(Mailbox.objects.all())
-    overdue_percentage = round(float(len(late)) / len(rented) * 100)
+    overdue_percentage = round(float(len(late)) / len(rented) * 100) or 0
     monthly_income = sum(mo.monthly_rate for mo in rented)
     percent_rented = round(float(len(late)) / number_of_boxes * 100)
     stats = {
