@@ -77,8 +77,8 @@
         <table>
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Payment for</th>
+                    <th>Type</th>
+                    <th>Reason</th>
                     <th>Amount</th>
                     <th>Date</th>
                     <th>Method</th>
@@ -87,8 +87,8 @@
             <tbody>
                 {% for transaction in transactions %}
                     <tr>
-                        <td>{{ transaction.customer }}</td>
                         <td>{{ transaction.transaction_type }}</td>
+                        <td>{{ transaction.transaction_reason }}</td>
                         <td>${{ transaction.amount }}</td>
                         <td>{{ transaction.date }}</td>
                         <td>{{ transaction.method }}</td>
