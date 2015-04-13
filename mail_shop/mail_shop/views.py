@@ -18,12 +18,12 @@ def index(request):
         'stats': stats,
         'claim_form': claim_form
     }
-    return render(request, 'index.html', context)
+    return render(request, 'mailshop_index.html', context)
 
 def get_stats(late):
     rented = MailboxOwner.objects.all()
     number_of_boxes = len(Mailbox.objects.all())
-    overdue_percentage = round(float(len(late)) / len(rented) * 100)
+    overdue_percentage = round(float(len(late)) / len(rented) * 100) or 0
     monthly_income = sum(mo.monthly_rate for mo in rented)
     percent_rented = round(float(len(late)) / number_of_boxes * 100)
     stats = {

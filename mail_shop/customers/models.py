@@ -5,8 +5,6 @@ from django.core import validators
 from sorl.thumbnail import ImageField
 
 
-
-
 STATES = (
     ("AL", "Alabama"),
     ("AK", "Alaska"),

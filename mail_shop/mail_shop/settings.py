@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'customers',
     'packages',
     'mailboxes',
+    'transactions',
     'sorl.thumbnail',
 )
 

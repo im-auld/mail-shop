@@ -5,6 +5,7 @@ from django.conf import settings
 from customers.urls import customers_patterns
 from packages.urls import packages_patterns
 from mailboxes.urls import mailboxes_patterns
+from transactions.urls import transactions_patterns
 
 
 urlpatterns = patterns('',
@@ -38,3 +39,4 @@ urlpatterns.extend(file_patterns)
 urlpatterns.extend(index_patterns)
 urlpatterns.extend(packages_patterns)
 urlpatterns.extend(mailboxes_patterns)
+urlpatterns.extend(transactions_patterns)

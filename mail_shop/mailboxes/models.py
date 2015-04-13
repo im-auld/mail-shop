@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 
@@ -34,6 +35,8 @@ class MailboxOwner(models.Model):
     owner = models.ForeignKey('customers.Customer')
     start_date = models.DateField('Owned Since: ')
     due_date = models.DateField('Next Bill Due: ')
+    last_payment_date = models.DateField('Last Payment Date: ')
+    balance = models.IntegerField('Balance: ')
     num_additional_users = models.IntegerField('Additional users: ', default=0)
     num_of_key_sets = models.IntegerField('Sets of keys: ', default=1)
     used_for_business = models.BooleanField('Used for business', default=False)
@@ -61,3 +64,15 @@ class MailboxOwner(models.Model):
     @property
     def is_owned(self):
         return True
+
+    @property
+    def set_balance(self):
+        today = date.today()
+        last_payment = date(
+            int(self.last_payment_date.year),
+            int(self.last_payment_date.month),
+            int(self.last_payment_date.day)
+        )
+        balance = self.monthly_rate * ((
+            (today - last_payment)).days / 30)
+        return balance

@@ -12,6 +12,7 @@ mail_shop/*.sqlite3
 mail_shop/customers/migrations
 mail_shop/packages/migrations
 mail_shop/mailboxes/migrations
+mail_shop/transactions/migrations
 mail_shop/customer_photos/
 mail_shop/media
 mail_shop/cache

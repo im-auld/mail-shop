@@ -48,17 +48,50 @@
         </table>
     <h2>Mailboxes</h2>
         <table>
-            <tbody>
+            <thead>
                 <tr>
                     <th>Box Number</th>
                     <th>Start Date</th>
                     <th>Due Date</th>
+                    <th>Last Payment Date</th>
+                    <th>Balance</th>
+                    <th></th>
                 </tr>
+            </thead>
+            <tbody>
                 {% for mailbox in mailboxes %}
                     <tr>
                         <td>{{ mailbox.box_num }}</td>
                         <td>{{ mailbox.owner.start_date }}</td>
                         <td>{{ mailbox.owner.due_date }}</td>
+                        <td>{{ mailbox.owner.last_payment_date }}</td>
+                        <td>${{ mailbox.owner.balance }}</td>
+                        <td>
+                            <a href="{% url 'filled_transaction_view' mailbox.pk %}">Make Payment</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <h2>Transactions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Reason</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.transaction_type }}</td>
+                        <td>{{ transaction.transaction_reason }}</td>
+                        <td>${{ transaction.amount }}</td>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.method }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

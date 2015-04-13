@@ -10,7 +10,7 @@ def index(request):
     context = {
         'mailboxes': mailboxes,
     }
-    return render(request, 'mailboxes/index.html', context)
+    return render(request, 'mailboxes/mailboxes_index.html', context)
 
 def mailbox_view(request, mailbox_id):
     try:
