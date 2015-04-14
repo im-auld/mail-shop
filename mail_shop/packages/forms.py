@@ -5,6 +5,13 @@ from mailboxes.models import MailboxOwner
 from packages.models import Package
 
 
+def get_choices():
+    return [
+        (p.pk, '{p} - {p.tracking_number}'.format(p=p))
+            for p in Package.objects.filter(date_claimed__isnull=True)
+        ]
+
+
 class PackageForm(forms.ModelForm):
     def save(self):
         instance = super(PackageForm, self).save(commit=False)
@@ -22,9 +29,6 @@ class ClaimForm(forms.Form):
         widget=forms.CheckboxSelectMultiple(
             attrs={'class': 'package-list-item'}
         ),
-        choices=[
-            (p.pk, '{p} - {p.tracking_number}'.format(p=p))
-                for p in Package.objects.filter(date_claimed__isnull=True)
-        ],
+        choices=get_choices(),
     )
     pin = fields.IntegerField(widget=forms.PasswordInput)

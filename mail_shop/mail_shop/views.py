@@ -1,12 +1,13 @@
 from datetime import date
 from django.shortcuts import render
 
-from packages.forms import ClaimForm
+from packages.forms import ClaimForm, get_choices
 from mailboxes.models import Mailbox, MailboxOwner
 
 
 def index(request):
     claim_form = ClaimForm()
+    claim_form.fields['unclaimed_packages'].choices = get_choices()
     alerts = MailboxOwner.objects.filter(due_date__lt=date.today())
     stats = get_stats(alerts)
     context = {
