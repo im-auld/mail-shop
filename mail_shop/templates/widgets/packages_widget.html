@@ -5,6 +5,8 @@
     {{ claim_form }}
     <button type="submit" name="django-claim">Claim</button>
 </form>
+<h3><a href="{% url 'package_form_view' %}">Add a Package</a></h3>
+
 <script >
     function titleCase(val){
         return val.charAt(0).toUpperCase()+val.substr(1).toLowerCase();
